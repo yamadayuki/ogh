@@ -1,3 +1,3 @@
 import { entrypoint } from "@yamadayuki/ogh-core";
 
-entrypoint("ogh-sample").parse(process.argv);
+entrypoint("@yamadayuki/ogh-sample", "lib/index.js").parse(process.argv);

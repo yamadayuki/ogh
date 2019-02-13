@@ -33,9 +33,13 @@ export function getGitHookFilepath(hookName: Hook): string {
   return resolve(getGitHooksDirectory(), hookName);
 }
 
-function render(packageName: string, hookName: string) {
+function render(
+  packageName: string,
+  hookName: string,
+  scriptPath: string = "lib/index.js"
+) {
   return `#!/bin/sh
-scriptPath="node_modules/${packageName}/lib/run.js"
+scriptPath="node_modules/${packageName}/${scriptPath}"
 hookName="${hookName}"
 gitParams="$*"
 
@@ -48,16 +52,16 @@ fi
 `;
 }
 
-function createHook(packageName: string, hookName: Hook) {
+function createHook(packageName: string, hookName: Hook, scriptPath?: string) {
   writeFile(
     getGitHookFilepath(hookName),
-    render(packageName, hookName),
+    render(packageName, hookName, scriptPath),
     { flag: "w", mode: parseInt("0755", 8) },
     console.warn
   );
 }
 
-export function installHooks(packageName: string) {
+export function installHooks(packageName: string, scriptPath?: string) {
   GIT_HOOKS.forEach(hookName => {
     access(
       getGitHookFilepath(hookName),
@@ -70,7 +74,7 @@ export function installHooks(packageName: string) {
           return;
         }
 
-        return createHook(packageName, hookName);
+        return createHook(packageName, hookName, scriptPath);
       }
     );
   });
