@@ -23,5 +23,8 @@
   },
   "dependencies": {
     "cosmiconfig": "^5.0.7"
-  }
+  },
+  "files": [
+    "lib"
+  ]
 }
