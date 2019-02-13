@@ -13,5 +13,11 @@
   ],
   "scripts": {
     "build": "lerna run build"
+  },
+  "@yamadayuki/ogh-sample": {
+    "prettier": {
+      "config": "./.prettierrc",
+      "pattern": "**/packages/**/*.{js,jsx,ts,tsx}"
+    }
   }
 }
