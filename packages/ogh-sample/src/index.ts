@@ -1,8 +1,8 @@
-import { entrypoint, extractHookFromArgs, extractCwdFromArgs } from "@yamadayuki/ogh-core";
-import { resolve } from "path";
-import { resolveConfig, format } from "prettier";
-import { shellSync, sync } from "execa";
+import { entrypoint, extractCwdFromArgs, extractHookFromArgs } from "@yamadayuki/ogh-core";
+import { shellSync } from "execa";
 import { readFileSync, writeFileSync } from "fs";
+import { resolve } from "path";
+import { format, resolveConfig } from "prettier";
 
 const SAMPLE_PRETTIER_CONFIG_FILE = resolve(__dirname, "..", ".prettierrc");
 
