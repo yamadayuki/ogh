@@ -40,9 +40,12 @@ export function getGitHookFilepath(hookName: Hook): string {
 function render(
   packageName: string,
   hookName: string,
-  scriptPath: string = "lib/index.js"
+  scriptPath: string = "lib/index.js",
+  append: boolean = false
 ) {
-  return `#!/bin/sh
+  return `${append ? "" : "#!/bin/sh"}
+# DO NOT EDIT ${packageName} START
+
 scriptPath="node_modules/${packageName}/${scriptPath}"
 hookName="${hookName}"
 gitParams="$*"
@@ -53,6 +56,8 @@ fi
 if [ -f $scriptPath ]; then
   node $scriptPath $hookName "$gitParams"
 fi
+
+# DO NOT EDIT ${packageName} END
 `;
 }
 
@@ -61,7 +66,24 @@ function createHook(packageName: string, hookName: Hook, scriptPath?: string) {
     getGitHookFilepath(hookName),
     render(packageName, hookName, scriptPath),
     { flag: "w", mode: parseInt("0755", 8) },
-    console.warn
+    err => {
+      if (err) {
+        console.error(err);
+      }
+    }
+  );
+}
+
+function appendHook(packageName: string, hookName: Hook, scriptPath?: string) {
+  writeFile(
+    getGitHookFilepath(hookName),
+    render(packageName, hookName, scriptPath, true),
+    { flag: "a", mode: parseInt("0755, 8") },
+    err => {
+      if (err) {
+        console.error(err);
+      }
+    }
   );
 }
 
@@ -71,14 +93,18 @@ export function installHooks(packageName: string, scriptPath?: string) {
       getGitHookFilepath(hookName),
       constants.W_OK | constants.X_OK,
       err => {
-        // TODO: Support append mode if error code === 'ENOENT'
-        // appendHook(packageName, hookName);
-        if (err && err.code !== "ENOENT") {
-          console.error(err);
-          return;
+        if (err) {
+          if (err.code === "ENOENT") {
+            createHook(packageName, hookName, scriptPath);
+            return;
+          } else {
+            console.error(err);
+            return;
+          }
         }
 
-        return createHook(packageName, hookName, scriptPath);
+        appendHook(packageName, hookName, scriptPath);
+        return;
       }
     );
   });
@@ -88,5 +114,6 @@ export function installHooks(packageName: string, scriptPath?: string) {
 export function uninstallHooks() {
   GIT_HOOKS.forEach(hookName => {
     unlink(getGitHookFilepath(hookName), console.warn);
+    return;
   });
 }
