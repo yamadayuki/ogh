@@ -13,7 +13,8 @@
   ],
   "scripts": {
     "postinstall": "lerna bootstrap",
-    "build": "lerna run build"
+    "build": "lerna run build",
+    "publish": "lerna publish"
   },
   "@yamadayuki/ogh-sample": {
     "prettier": {

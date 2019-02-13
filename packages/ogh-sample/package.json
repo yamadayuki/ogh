@@ -13,6 +13,8 @@
   "homepage": "https://github.com/yamadayuki/ogh",
   "repository": "yamadayuki/ogh",
   "scripts": {
+    "postinstall": "node lib/index.js install",
+    "preuninstall": "node lib/index.js uninstall",
     "build": "tsc -b",
     "test": "echo NO TESTS"
   },
