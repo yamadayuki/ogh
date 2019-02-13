@@ -1,0 +1,13 @@
+{
+  "name": "ogh",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Yuki Yamada <yamadayuuki0818@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "lerna": "^3.8.0"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}
