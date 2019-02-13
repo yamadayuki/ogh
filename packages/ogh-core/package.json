@@ -14,11 +14,16 @@
   "repository": "yamadayuki/ogh",
   "scripts": {
     "build": "tsc -b",
-    "test": "echo NO TESTS"
+    "test": "jest -c ./jest.config.js"
   },
   "devDependencies": {
     "@types/cosmiconfig": "^5.0.3",
+    "@types/jest": "^24.0.3",
+    "@types/mock-fs": "^3.6.30",
     "@types/node": "^11.9.3",
+    "jest": "^24.1.0",
+    "mock-fs": "^4.8.0",
+    "ts-jest": "^23.10.5",
     "typescript": "^3.3.3"
   },
   "dependencies": {

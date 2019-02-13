@@ -16,12 +16,17 @@
     "postinstall": "node lib/index.js install",
     "preuninstall": "node lib/index.js uninstall",
     "build": "tsc -b",
-    "test": "echo NO TESTS"
+    "test": "jest -c ./jest.config.js"
   },
   "devDependencies": {
     "@types/execa": "^0.9.0",
+    "@types/jest": "^24.0.3",
+    "@types/mock-fs": "^3.6.30",
     "@types/node": "^11.9.3",
     "@types/prettier": "^1.16.0",
+    "jest": "^24.1.0",
+    "mock-fs": "^4.8.0",
+    "ts-jest": "^23.10.5",
     "typescript": "^3.3.3"
   },
   "dependencies": {
