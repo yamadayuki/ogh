@@ -1,6 +1,7 @@
 {
   "name": "ogh",
-  "version": "1.0.0",
+  "version": "0.0.0",
+  "private": true,
   "main": "index.js",
   "author": "Yuki Yamada <yamadayuuki0818@gmail.com>",
   "license": "MIT",
@@ -9,5 +10,8 @@
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "scripts": {
+    "build": "lerna run --parallel build"
+  }
 }
