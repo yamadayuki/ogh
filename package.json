@@ -12,6 +12,7 @@
     "packages/*"
   ],
   "scripts": {
+    "postinstall": "lerna bootstrap",
     "build": "lerna run build"
   },
   "@yamadayuki/ogh-sample": {
