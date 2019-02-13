@@ -17,9 +17,7 @@ class Ogh {
     this.performHook = _ => {};
   }
 
-  public registerPerformHook(
-    fn: (args: typeof process.argv, config: cosmiconfig.Config) => void
-  ) {
+  public registerPerformHook(fn: (args: typeof process.argv, config: cosmiconfig.Config) => void) {
     const result = cosmiconfig(this.packageName).searchSync();
 
     this.performHook = args => fn(args, result ? result.config : {});

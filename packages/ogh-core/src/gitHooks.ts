@@ -37,12 +37,7 @@ export function getGitHookFilepath(hookName: Hook): string {
   return resolve(getGitHooksDirectory(), hookName);
 }
 
-function render(
-  packageName: string,
-  hookName: string,
-  scriptPath: string = "lib/index.js",
-  append: boolean = false
-) {
+function render(packageName: string, hookName: string, scriptPath: string = "lib/index.js", append: boolean = false) {
   return `${append ? "" : "#!/bin/sh\n"}# DO NOT EDIT ${packageName} START
 
 scriptPath="node_modules/${packageName}/${scriptPath}"
@@ -113,16 +108,11 @@ function removeHook(packageName: string, hookName: Hook) {
       }
     });
 
-    writeFile(
-      getGitHookFilepath(hookName),
-      newData.join("\n"),
-      { flag: "w", mode: parseInt("0755", 8) },
-      err => {
-        if (err) {
-          console.error(err);
-        }
+    writeFile(getGitHookFilepath(hookName), newData.join("\n"), { flag: "w", mode: parseInt("0755", 8) }, err => {
+      if (err) {
+        console.error(err);
       }
-    );
+    });
   });
 }
 
@@ -144,24 +134,20 @@ export function installHooks(packageName: string, scriptPath?: string) {
       return;
     }
 
-    access(
-      getGitHookFilepath(hookName),
-      constants.W_OK | constants.X_OK,
-      err => {
-        if (err) {
-          if (err.code === "ENOENT") {
-            createHook(packageName, hookName, scriptPath);
-            return;
-          } else {
-            console.error(err);
-            return;
-          }
+    access(getGitHookFilepath(hookName), constants.W_OK | constants.X_OK, err => {
+      if (err) {
+        if (err.code === "ENOENT") {
+          createHook(packageName, hookName, scriptPath);
+          return;
+        } else {
+          console.error(err);
+          return;
         }
-
-        appendHook(packageName, hookName, scriptPath);
-        return;
       }
-    );
+
+      appendHook(packageName, hookName, scriptPath);
+      return;
+    });
   });
 }
 
@@ -171,18 +157,14 @@ export function uninstallHooks(packageName: string) {
       return;
     }
 
-    access(
-      getGitHookFilepath(hookName),
-      constants.R_OK | constants.W_OK | constants.X_OK,
-      err => {
-        if (err && err.code !== "ENOENT") {
-          console.error(err);
-          return;
-        }
-
-        removeHook(packageName, hookName);
+    access(getGitHookFilepath(hookName), constants.R_OK | constants.W_OK | constants.X_OK, err => {
+      if (err && err.code !== "ENOENT") {
+        console.error(err);
+        return;
       }
-    );
+
+      removeHook(packageName, hookName);
+    });
     return;
   });
 }

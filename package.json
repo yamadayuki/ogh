@@ -17,7 +17,8 @@
   "@yamadayuki/ogh-sample": {
     "prettier": {
       "config": "./.prettierrc",
-      "pattern": "**/packages/**/*.{js,jsx,ts,tsx}"
+      "pattern": "**/packages/**/*.{js,jsx,ts,tsx}",
+      "ignorePath": "./.prettierignore"
     }
   }
 }
