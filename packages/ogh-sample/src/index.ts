@@ -1,8 +1,8 @@
 import { entrypoint, extractCwdFromArgs, extractHookFromArgs } from "@yamadayuki/ogh-core";
 import { shellSync } from "execa";
 import { readFileSync, writeFileSync } from "fs";
-import { resolve } from "path";
-import { format, resolveConfig } from "prettier";
+import { resolve, extname } from "path";
+import { format, resolveConfig, getSupportInfo } from "prettier";
 
 const SAMPLE_PRETTIER_CONFIG_FILE = resolve(__dirname, "..", ".prettierrc");
 
@@ -20,6 +20,15 @@ function stageFile(args: any, file: string) {
   shellSync(`git add ${file}`, { cwd: extractCwdFromArgs(args) });
 }
 
+const supportedExtensions = getSupportInfo().languages.reduce<string[]>(
+  (acc, lang) => acc.concat(lang.extensions || []),
+  []
+);
+
+function isSupportedExtension(file: string) {
+  return supportedExtensions.includes(extname(file));
+}
+
 function preCommitHook(args: any, config: any) {
   const files = getStagedFiles(args);
   const unstaged = getUnstagedFiles(args);
@@ -28,6 +37,10 @@ function preCommitHook(args: any, config: any) {
   const isFullyStaged = (file: string) => !unstaged.includes(file);
 
   files.forEach(file => {
+    if (isSupportedExtension(file)) {
+      return;
+    }
+
     const filepath = resolve(rootDir, file);
     const prettierConfig = resolveConfig.sync(filepath, {
       config: config.prettier.config ? config.prettier.config : SAMPLE_PRETTIER_CONFIG_FILE,
