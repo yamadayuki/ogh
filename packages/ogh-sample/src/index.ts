@@ -37,7 +37,7 @@ function preCommitHook(args: any, config: any) {
   const isFullyStaged = (file: string) => !unstaged.includes(file);
 
   files.forEach(file => {
-    if (isSupportedExtension(file)) {
+    if (!isSupportedExtension(file)) {
       return;
     }
 
