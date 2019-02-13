@@ -1,4 +1,4 @@
-import { access, constants, createWriteStream, readFile, writeFile } from "fs";
+import { access, constants, readFile, readFileSync, writeFile } from "fs";
 import { resolve } from "path";
 import { getGitHooksDirectory } from "./git";
 
@@ -43,8 +43,7 @@ function render(
   scriptPath: string = "lib/index.js",
   append: boolean = false
 ) {
-  return `${append ? "" : "#!/bin/sh"}
-# DO NOT EDIT ${packageName} START
+  return `${append ? "" : "#!/bin/sh\n"}# DO NOT EDIT ${packageName} START
 
 scriptPath="node_modules/${packageName}/${scriptPath}"
 hookName="${hookName}"
@@ -127,8 +126,24 @@ function removeHook(packageName: string, hookName: Hook) {
   });
 }
 
+function checkInstalled(packageName: string, hookName: Hook) {
+  const startComment = `# DO NOT EDIT ${packageName} START`;
+  const endComment = `# DO NOT EDIT ${packageName} END`;
+
+  try {
+    const data = readFileSync(getGitHookFilepath(hookName), "utf8");
+    return data.indexOf(startComment) !== -1 && data.indexOf(endComment) !== -1;
+  } catch (_) {
+    return false;
+  }
+}
+
 export function installHooks(packageName: string, scriptPath?: string) {
   GIT_HOOKS.forEach(hookName => {
+    if (checkInstalled(packageName, hookName)) {
+      return;
+    }
+
     access(
       getGitHookFilepath(hookName),
       constants.W_OK | constants.X_OK,
@@ -152,6 +167,10 @@ export function installHooks(packageName: string, scriptPath?: string) {
 
 export function uninstallHooks(packageName: string) {
   GIT_HOOKS.forEach(hookName => {
+    if (!checkInstalled(packageName, hookName)) {
+      return;
+    }
+
     access(
       getGitHookFilepath(hookName),
       constants.R_OK | constants.W_OK | constants.X_OK,
