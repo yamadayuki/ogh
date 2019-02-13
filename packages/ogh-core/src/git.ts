@@ -11,7 +11,7 @@ export function getDotGitDirectory(): string {
 
 export function getGitHooksDirectory(): string {
   return resolve(
-    execSync("git rev-parse --git-path hook")
+    execSync("git rev-parse --git-path hooks")
       .toString()
       .trimRight()
   );

@@ -12,6 +12,6 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "lerna run --parallel build"
+    "build": "lerna run build"
   }
 }

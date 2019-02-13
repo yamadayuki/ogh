@@ -59,20 +59,20 @@ function createHook(packageName: string, hookName: Hook) {
 
 export function installHooks(packageName: string) {
   GIT_HOOKS.forEach(hookName => {
-    const hookFilepath = getGitHookFilepath(hookName);
-
-    access(hookFilepath, constants.W_OK | constants.X_OK, err => {
-      if (err) {
+    access(
+      getGitHookFilepath(hookName),
+      constants.W_OK | constants.X_OK,
+      err => {
         // TODO: Support append mode if error code === 'ENOENT'
         // appendHook(packageName, hookName);
-        if (err.code !== "ENOENT") {
+        if (err && err.code !== "ENOENT") {
           console.error(err);
           return;
         }
-      }
 
-      return createHook(packageName, hookName);
-    });
+        return createHook(packageName, hookName);
+      }
+    );
   });
 }
 

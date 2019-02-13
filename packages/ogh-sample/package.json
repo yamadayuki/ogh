@@ -1,5 +1,5 @@
 {
-  "name": "@yamadayuki/ogh-core",
+  "name": "@yamadayuki/ogh-sample",
   "version": "0.0.0",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -19,5 +19,8 @@
   "devDependencies": {
     "@types/node": "^11.9.3",
     "typescript": "^3.3.3"
+  },
+  "dependencies": {
+    "@yamadayuki/ogh-core": "^0.0.0"
   }
 }
