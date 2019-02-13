@@ -1,5 +1,6 @@
 import * as cosmiconfig from "cosmiconfig";
 import { installHooks, isGitHook, uninstallHooks } from "./gitHooks";
+import { resolve } from "path";
 
 interface OghConstructorParams {
   packageName: string;
@@ -55,4 +56,8 @@ export function extractHookFromArgs(args: typeof process.argv) {
   } else {
     return "";
   }
+}
+
+export function extractCwdFromArgs(args: typeof process.argv) {
+  return resolve(args[1].split("node_modules")[0]);
 }

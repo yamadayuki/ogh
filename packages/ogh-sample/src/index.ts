@@ -1,28 +1,22 @@
-import { entrypoint, extractHookFromArgs } from "@yamadayuki/ogh-core";
+import { entrypoint, extractHookFromArgs, extractCwdFromArgs } from "@yamadayuki/ogh-core";
 import * as execa from "execa";
 import { resolve } from "path";
 
 function preCommitHook(args: any, config: any) {
   let prettierExecString = "prettier --write";
 
-  if (config.prettier.config) {
-    prettierExecString = prettierExecString.concat(" ", "--config", " ", config.prettier.config);
-  } else {
+  if (!config.prettier.config) {
     prettierExecString = prettierExecString.concat(" ", "--config", " ", resolve(__dirname, "..", ".prettierrc"));
-  }
-
-  if (config.prettier.ignorePath) {
-    prettierExecString = prettierExecString.concat(" ", "--ignore-path", " ", config.prettier.ignorePath);
   }
 
   if (config.prettier.pattern) {
     prettierExecString = prettierExecString.concat(" ", config.prettier.pattern);
   }
 
-  console.log(prettierExecString);
+  console.log(args);
 
   execa.shellSync(prettierExecString, {
-    cwd: process.cwd(),
+    cwd: extractCwdFromArgs(args),
     stdio: "inherit",
   });
 }
