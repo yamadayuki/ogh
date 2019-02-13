@@ -2,7 +2,7 @@ import { access, constants, unlink, writeFile } from "fs";
 import { resolve } from "path";
 import { getGitHooksDirectory } from "./git";
 
-type Hook =
+export type Hook =
   | "applypatch-msg"
   | "commit-msg"
   | "fsmonitor-watchman"
@@ -15,7 +15,7 @@ type Hook =
   | "prepare-commit-msg"
   | "update";
 
-const GIT_HOOKS: Hook[] = [
+export const GIT_HOOKS: Hook[] = [
   "applypatch-msg",
   "commit-msg",
   "fsmonitor-watchman",
@@ -28,6 +28,10 @@ const GIT_HOOKS: Hook[] = [
   "prepare-commit-msg",
   "update",
 ];
+
+export function isGitHook(str: string): str is Hook {
+  return (GIT_HOOKS as string[]).includes(str);
+}
 
 export function getGitHookFilepath(hookName: Hook): string {
   return resolve(getGitHooksDirectory(), hookName);

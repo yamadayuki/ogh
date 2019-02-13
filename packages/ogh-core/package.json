@@ -17,7 +17,11 @@
     "test": "echo NO TESTS"
   },
   "devDependencies": {
+    "@types/cosmiconfig": "^5.0.3",
     "@types/node": "^11.9.3",
     "typescript": "^3.3.3"
+  },
+  "dependencies": {
+    "cosmiconfig": "^5.0.7"
   }
 }
