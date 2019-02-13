@@ -16,3 +16,27 @@ export function getGitHooksDirectory(): string {
       .trimRight()
   );
 }
+
+export function getRootDirectory(): string {
+  return resolve(getDotGitDirectory(), "..");
+}
+
+export function getStagedFiles(): string[] {
+  return execSync("git diff --cached --name-only", { cwd: getRootDirectory() })
+    .toString()
+    .split("\n")
+    .filter(s => s.length > 0);
+}
+
+export function getUnstagedFiles(): string[] {
+  return execSync("git diff --name-only", { cwd: getRootDirectory() })
+    .toString()
+    .split("\n")
+    .filter(s => s.length > 0);
+}
+
+export function stageFiles(files: string[]) {
+  const filesStr = files.join(" ");
+
+  execSync(`git add ${filesStr}`, { cwd: getRootDirectory() });
+}
