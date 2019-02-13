@@ -15,7 +15,8 @@
     "postinstall": "lerna bootstrap",
     "build": "lerna run build",
     "prepublish": "npm run build",
-    "publish": "lerna publish"
+    "publish": "lerna publish",
+    "test": "lerna run --parallel test"
   },
   "@yamadayuki/ogh-sample": {
     "prettier": {
