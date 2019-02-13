@@ -1,23 +1,52 @@
 import { entrypoint, extractHookFromArgs, extractCwdFromArgs } from "@yamadayuki/ogh-core";
-import * as execa from "execa";
 import { resolve } from "path";
+import { resolveConfig, format } from "prettier";
+import { shellSync, sync } from "execa";
+import { readFileSync, writeFileSync } from "fs";
+
+const SAMPLE_PRETTIER_CONFIG_FILE = resolve(__dirname, "..", ".prettierrc");
+
+function getStagedFiles(args: any) {
+  const { stdout } = shellSync("git diff --cached --name-only", { cwd: extractCwdFromArgs(args) });
+  return stdout.split("\n").filter(line => line.length > 0);
+}
+
+function getUnstagedFiles(args: any) {
+  const { stdout } = shellSync("git diff --name-only", { cwd: extractCwdFromArgs(args) });
+  return stdout.split("\n").filter(line => line.length > 0);
+}
+
+function stageFile(args: any, file: string) {
+  shellSync(`git add ${file}`, { cwd: extractCwdFromArgs(args) });
+}
 
 function preCommitHook(args: any, config: any) {
-  let prettierExecString = "prettier --write";
+  const files = getStagedFiles(args);
+  const unstaged = getUnstagedFiles(args);
+  const rootDir = extractCwdFromArgs(args);
 
-  if (!config.prettier.config) {
-    prettierExecString = prettierExecString.concat(" ", "--config", " ", resolve(__dirname, "..", ".prettierrc"));
-  }
+  const isFullyStaged = (file: string) => !unstaged.includes(file);
 
-  if (config.prettier.pattern) {
-    prettierExecString = prettierExecString.concat(" ", config.prettier.pattern);
-  }
+  files.forEach(file => {
+    const filepath = resolve(rootDir, file);
+    const prettierConfig = resolveConfig.sync(filepath, {
+      config: config.prettier.config ? config.prettier.config : SAMPLE_PRETTIER_CONFIG_FILE,
+    });
 
-  console.log(args);
+    if (!prettierConfig) {
+      return null;
+    }
 
-  execa.shellSync(prettierExecString, {
-    cwd: extractCwdFromArgs(args),
-    stdio: "inherit",
+    const input = readFileSync(filepath, "utf8");
+    const output = format(input, { ...prettierConfig, filepath });
+
+    if (output !== input) {
+      writeFileSync(filepath, output);
+
+      if (isFullyStaged(file)) {
+        stageFile(args, file);
+      }
+    }
   });
 }
 
