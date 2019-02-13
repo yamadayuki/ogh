@@ -1,5 +1,5 @@
 {
-  "name": "ogh-cli",
+  "name": "@yamadayuki/ogh-cli",
   "version": "0.0.0",
   "author": "Yuki Yamada @yamadayuki",
   "bin": {

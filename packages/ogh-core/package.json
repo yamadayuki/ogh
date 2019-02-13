@@ -1,0 +1,24 @@
+{
+  "name": "@yamadayuki/ogh-core",
+  "version": "0.0.0",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "keywords": [],
+  "author": "Yuki Yamada @yamadayuki",
+  "license": "MIT",
+  "bugs": "https://github.com/yamadayuki/ogh/issues",
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "homepage": "https://github.com/yamadayuki/ogh",
+  "repository": "yamadayuki/ogh",
+  "scripts": {
+    "prebuild": "rm -rf lib",
+    "build": "tsc -b",
+    "test": "echo NO TESTS"
+  },
+  "devDependencies": {
+    "@types/node": "^11.9.3",
+    "typescript": "^3.3.3"
+  }
+}
