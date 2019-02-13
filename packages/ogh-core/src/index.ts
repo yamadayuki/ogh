@@ -37,7 +37,7 @@ class Ogh {
         break;
       }
       case "uninstall": {
-        uninstallHooks();
+        uninstallHooks(this.packageName);
         break;
       }
       default: {

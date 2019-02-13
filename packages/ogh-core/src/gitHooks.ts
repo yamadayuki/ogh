@@ -1,4 +1,4 @@
-import { access, constants, unlink, writeFile } from "fs";
+import { access, constants, createWriteStream, readFile, writeFile } from "fs";
 import { resolve } from "path";
 import { getGitHooksDirectory } from "./git";
 
@@ -78,13 +78,53 @@ function appendHook(packageName: string, hookName: Hook, scriptPath?: string) {
   writeFile(
     getGitHookFilepath(hookName),
     render(packageName, hookName, scriptPath, true),
-    { flag: "a", mode: parseInt("0755, 8") },
+    { flag: "a", mode: parseInt("0755", 8) },
     err => {
       if (err) {
         console.error(err);
       }
     }
   );
+}
+
+function removeHook(packageName: string, hookName: Hook) {
+  const startComment = `# DO NOT EDIT ${packageName} START`;
+  const endComment = `# DO NOT EDIT ${packageName} END`;
+
+  readFile(getGitHookFilepath(hookName), "utf8", (err, data) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+
+    let newData: string[] = [];
+    const lines = data.split("\n");
+    let ignore = false;
+    lines.forEach(line => {
+      if (line === startComment) {
+        ignore = true;
+      }
+
+      if (!ignore) {
+        newData = newData.concat(line);
+      }
+
+      if (line === endComment) {
+        ignore = false;
+      }
+    });
+
+    writeFile(
+      getGitHookFilepath(hookName),
+      newData.join("\n"),
+      { flag: "w", mode: parseInt("0755", 8) },
+      err => {
+        if (err) {
+          console.error(err);
+        }
+      }
+    );
+  });
 }
 
 export function installHooks(packageName: string, scriptPath?: string) {
@@ -110,10 +150,20 @@ export function installHooks(packageName: string, scriptPath?: string) {
   });
 }
 
-// TODO: Support package name to uninstall. We should uninstall using the removing codes instead of removing files.
-export function uninstallHooks() {
+export function uninstallHooks(packageName: string) {
   GIT_HOOKS.forEach(hookName => {
-    unlink(getGitHookFilepath(hookName), console.warn);
+    access(
+      getGitHookFilepath(hookName),
+      constants.R_OK | constants.W_OK | constants.X_OK,
+      err => {
+        if (err && err.code !== "ENOENT") {
+          console.error(err);
+          return;
+        }
+
+        removeHook(packageName, hookName);
+      }
+    );
     return;
   });
 }
