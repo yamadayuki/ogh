@@ -30,5 +30,8 @@
   "files": [
     "lib",
     ".prettierrc"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }
