@@ -1,6 +1,6 @@
 import * as cosmiconfig from "cosmiconfig";
-import { installHooks, isGitHook, uninstallHooks } from "./gitHooks";
 import { resolve } from "path";
+import { installHooks, isGitHook, uninstallHooks } from "./gitHooks";
 
 interface OghConstructorParams {
   packageName: string;
