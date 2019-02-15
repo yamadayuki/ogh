@@ -19,6 +19,7 @@
   "devDependencies": {
     "@types/cosmiconfig": "^5.0.3",
     "@types/jest": "^24.0.3",
+    "@types/jest-diff": "^20.0.1",
     "@types/mock-fs": "^3.6.30",
     "@types/node": "^11.9.3",
     "jest": "^24.1.0",
