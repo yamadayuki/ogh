@@ -30,7 +30,7 @@
     "typescript": "^3.3.3"
   },
   "dependencies": {
-    "@yamadayuki/ogh-core": "^0.0.4",
+    "@yamadayuki/ogh": "^0.0.4",
     "execa": "^1.0.0",
     "prettier": "^1.16.4"
   },

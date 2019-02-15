@@ -1,5 +1,5 @@
 {
-  "name": "@yamadayuki/ogh-core",
+  "name": "@yamadayuki/ogh",
   "version": "0.0.4",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

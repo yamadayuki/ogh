@@ -1,4 +1,4 @@
-import { entrypoint, extractCwdFromArgs, extractHookFromArgs } from "@yamadayuki/ogh-core";
+import { entrypoint, extractCwdFromArgs, extractHookFromArgs } from "@yamadayuki/ogh";
 import { shellSync } from "execa";
 import { readFileSync, writeFileSync } from "fs";
 import { resolve, extname } from "path";
