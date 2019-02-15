@@ -76,6 +76,6 @@ const oghSampleHook = (args: any, config: any) => {
   }
 };
 
-entrypoint("@yamadayuki/ogh-sample", "lib/index.js")
+entrypoint("@yamadayuki/ogh-sample", { scriptPath: "lib/index.js", hooks: ["pre-commit"] })
   .registerPerformHook(oghSampleHook)
   .parse(process.argv);
