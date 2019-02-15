@@ -13,8 +13,8 @@
   "homepage": "https://github.com/yamadayuki/ogh",
   "repository": "yamadayuki/ogh",
   "scripts": {
-    "postinstall": "node lib/index.js install",
-    "preuninstall": "node lib/index.js uninstall",
+    "postinstall": "test -e lib/index.js && node lib/index.js install || true",
+    "preuninstall": "test -e lib/index.js && node lib/index.js uninstall || true",
     "build": "tsc -b",
     "test": "jest -c ./jest.config.js"
   },
