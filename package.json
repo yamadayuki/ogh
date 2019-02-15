@@ -16,7 +16,8 @@
     "build": "lerna run build",
     "prepublish": "npm run build",
     "publish": "lerna publish",
-    "test": "lerna run --parallel test"
+    "test": "lerna run --parallel test",
+    "clean": "yarn lerna clean --yes && rm -rf packages/*/lib"
   },
   "@yamadayuki/ogh-sample": {
     "prettier": {
