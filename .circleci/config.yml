@@ -37,15 +37,15 @@ jobs:
     working_directory: ~/repo
     steps:
       - test-nodejs
-  node-v9:
-    docker:
-      - image: node:9
-    working_directory: ~/repo
-    steps:
-      - test-nodejs
   node-v10:
     docker:
       - image: node:10
+    working_directory: ~/repo
+    steps:
+      - test-nodejs
+  node-11:
+    docker:
+      - image: node:11
     working_directory: ~/repo
     steps:
       - test-nodejs
@@ -54,5 +54,5 @@ workflows:
   node-multi-build:
     jobs:
       - node-v8
-      - node-v9
       - node-v10
+      - node-v11
