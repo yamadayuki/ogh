@@ -1,20 +1,23 @@
 import * as cosmiconfig from "cosmiconfig";
 import { resolve } from "path";
-import { installHooks, isGitHook, uninstallHooks } from "./gitHooks";
+import { DEFAULT_SCRIPT_PATH, GIT_HOOKS, Hook, installHooks, isGitHook, uninstallHooks } from "./gitHooks";
 
 interface OghConstructorParams {
   packageName: string;
   scriptPath?: string;
+  hooks?: Hook[];
 }
 
 class Ogh {
   private packageName!: string;
   private scriptPath?: string;
+  private hooks: Hook[];
   private performHook!: (args: typeof process.argv) => void;
 
-  public constructor({ packageName, scriptPath }: OghConstructorParams) {
+  public constructor({ packageName, scriptPath, hooks }: OghConstructorParams) {
     this.packageName = packageName;
-    this.scriptPath = scriptPath;
+    this.scriptPath = scriptPath || DEFAULT_SCRIPT_PATH;
+    this.hooks = hooks || GIT_HOOKS;
     this.performHook = _ => {};
   }
 
@@ -29,7 +32,7 @@ class Ogh {
     const command = args[2];
     switch (command) {
       case "install": {
-        installHooks(this.packageName, this.scriptPath);
+        installHooks(this.packageName, this.scriptPath, this.hooks);
         break;
       }
       case "uninstall": {
@@ -46,8 +49,10 @@ class Ogh {
   }
 }
 
-export function entrypoint(packageName: string, scriptPath?: string) {
-  return new Ogh({ packageName, scriptPath });
+export type EntrypointOption = Pick<OghConstructorParams, "scriptPath" | "hooks">;
+
+export function entrypoint(packageName: string, opts: EntrypointOption = {}): Ogh {
+  return new Ogh({ packageName, ...opts });
 }
 
 export function extractHookFromArgs(args: typeof process.argv) {

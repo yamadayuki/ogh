@@ -50,6 +50,8 @@ export const GIT_HOOKS: Hook[] = [
   "p4-pre-submit",
 ];
 
+export const DEFAULT_SCRIPT_PATH = "lib/index.js";
+
 export function isGitHook(str: string): str is Hook {
   return (GIT_HOOKS as string[]).includes(str);
 }
@@ -58,7 +60,12 @@ export function getGitHookFilepath(hookName: Hook): string {
   return resolve(getGitHooksDirectory(), hookName);
 }
 
-function render(packageName: string, hookName: string, scriptPath: string = "lib/index.js", append: boolean = false) {
+function render(
+  packageName: string,
+  hookName: string,
+  scriptPath: string = DEFAULT_SCRIPT_PATH,
+  append: boolean = false
+) {
   return `${append ? "" : "#!/bin/sh\n"}# DO NOT EDIT ${packageName} START
 
 scriptPath="node_modules/${packageName}/${scriptPath}"
@@ -149,8 +156,8 @@ function checkInstalled(packageName: string, hookName: Hook) {
   }
 }
 
-export function installHooks(packageName: string, scriptPath?: string) {
-  GIT_HOOKS.forEach(hookName => {
+export function installHooks(packageName: string, scriptPath: string = DEFAULT_SCRIPT_PATH, hooks: Hook[] = GIT_HOOKS) {
+  hooks.forEach(hookName => {
     if (checkInstalled(packageName, hookName)) {
       return;
     }
