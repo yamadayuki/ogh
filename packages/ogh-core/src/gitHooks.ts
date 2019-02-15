@@ -2,31 +2,52 @@ import { access, constants, readFile, readFileSync, writeFile } from "fs";
 import { resolve } from "path";
 import { getGitHooksDirectory } from "./git";
 
+// see https://git-scm.com/docs/githooks
 export type Hook =
-  | "applypatch-msg"
-  | "commit-msg"
-  | "fsmonitor-watchman"
-  | "post-update"
-  | "pre-applypatch"
-  | "pre-commit"
-  | "pre-push"
-  | "pre-rebase"
-  | "pre-receive"
-  | "prepare-commit-msg"
-  | "update";
+  | "applypatch-msg" // https://git-scm.com/docs/githooks#_applypatch_msg
+  | "pre-applypatch" // https://git-scm.com/docs/githooks#_pre_applypatch
+  | "post-applypatch" // https://git-scm.com/docs/githooks#_post_applypatch
+  | "pre-commit" // https://git-scm.com/docs/githooks#_pre_commit
+  | "prepare-commit-msg" // https://git-scm.com/docs/githooks#_prepare_commit_msg
+  | "commit-msg" // https://git-scm.com/docs/githooks#_commit_msg
+  | "post-commit" // https://git-scm.com/docs/githooks#_post_commit
+  | "pre-rebase" // https://git-scm.com/docs/githooks#_pre_rebase
+  | "post-checkout" // https://git-scm.com/docs/githooks#_post_checkout
+  | "post-merge" // https://git-scm.com/docs/githooks#_post_merge
+  | "pre-push" // https://git-scm.com/docs/githooks#_pre_push
+  | "pre-receive" // https://git-scm.com/docs/githooks#pre-receive
+  | "update" // https://git-scm.com/docs/githooks#update
+  | "post-receive" // https://git-scm.com/docs/githooks#post-receive
+  | "post-update" // https://git-scm.com/docs/githooks#post-update
+  | "push-to-checkout" // https://git-scm.com/docs/githooks#_push_to_checkout
+  | "pre-auto-gc" // https://git-scm.com/docs/githooks#_pre_auto_gc
+  | "post-rewrite" // https://git-scm.com/docs/githooks#_post_rewrite
+  | "sendemail-validate" // https://git-scm.com/docs/githooks#_sendemail_validate
+  | "fsmonitor-watchman" // https://git-scm.com/docs/githooks#_fsmonitor_watchman
+  | "p4-pre-submit"; // https://git-scm.com/docs/githooks#_p4_pre_submit
 
 export const GIT_HOOKS: Hook[] = [
   "applypatch-msg",
-  "commit-msg",
-  "fsmonitor-watchman",
-  "post-update",
   "pre-applypatch",
+  "post-applypatch",
   "pre-commit",
-  "pre-push",
-  "pre-rebase",
-  "pre-receive",
   "prepare-commit-msg",
+  "commit-msg",
+  "post-commit",
+  "pre-rebase",
+  "post-checkout",
+  "post-merge",
+  "pre-push",
+  "pre-receive",
   "update",
+  "post-receive",
+  "post-update",
+  "push-to-checkout",
+  "pre-auto-gc",
+  "post-rewrite",
+  "sendemail-validate",
+  "fsmonitor-watchman",
+  "p4-pre-submit",
 ];
 
 export function isGitHook(str: string): str is Hook {
