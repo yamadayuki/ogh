@@ -1,4 +1,4 @@
-import { entrypoint, extractCwdFromArgs, extractHookFromArgs } from "@yamadayuki/ogh";
+import { entrypoint, extractGitRootDirFromArgs, extractHookFromArgs } from "@yamadayuki/ogh";
 import { shellSync } from "execa";
 import { readFileSync, writeFileSync } from "fs";
 import { resolve, extname } from "path";
@@ -7,17 +7,17 @@ import { format, resolveConfig, getSupportInfo } from "prettier";
 const SAMPLE_PRETTIER_CONFIG_FILE = resolve(__dirname, "..", ".prettierrc");
 
 function getStagedFiles(args: any) {
-  const { stdout } = shellSync("git diff --cached --name-only", { cwd: extractCwdFromArgs(args) });
+  const { stdout } = shellSync("git diff --cached --name-only", { cwd: extractGitRootDirFromArgs(args) });
   return stdout.split("\n").filter(line => line.length > 0);
 }
 
 function getUnstagedFiles(args: any) {
-  const { stdout } = shellSync("git diff --name-only", { cwd: extractCwdFromArgs(args) });
+  const { stdout } = shellSync("git diff --name-only", { cwd: extractGitRootDirFromArgs(args) });
   return stdout.split("\n").filter(line => line.length > 0);
 }
 
 function stageFile(args: any, file: string) {
-  shellSync(`git add ${file}`, { cwd: extractCwdFromArgs(args) });
+  shellSync(`git add ${file}`, { cwd: extractGitRootDirFromArgs(args) });
 }
 
 const supportedExtensions = getSupportInfo().languages.reduce<string[]>(
@@ -32,7 +32,7 @@ function isSupportedExtension(file: string) {
 function preCommitHook(args: any, config: any) {
   const files = getStagedFiles(args);
   const unstaged = getUnstagedFiles(args);
-  const rootDir = extractCwdFromArgs(args);
+  const rootDir = extractGitRootDirFromArgs(args);
 
   const isFullyStaged = (file: string) => !unstaged.includes(file);
 
