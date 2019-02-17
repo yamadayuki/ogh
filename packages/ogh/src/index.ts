@@ -63,6 +63,6 @@ export function extractHookFromArgs(args: typeof process.argv) {
   }
 }
 
-export function extractCwdFromArgs(args: typeof process.argv) {
+export function extractGitRootDirFromArgs(args: typeof process.argv) {
   return resolve(args[1].split("node_modules")[0]);
 }
