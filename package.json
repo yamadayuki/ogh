@@ -27,6 +27,6 @@
     }
   },
   "devDependencies": {
-    "frolint": "^0.1.6"
+    "frolint": "^0.1.7"
   }
 }

@@ -2145,10 +2145,10 @@ eslint-config-prettier@^4.0.0:
   dependencies:
     get-stdin "^6.0.0"
 
-eslint-config-wantedly-typescript@^0.1.6:
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/eslint-config-wantedly-typescript/-/eslint-config-wantedly-typescript-0.1.6.tgz#a0483fc71133d1f1d37430b65b9e1a5f9308c44c"
-  integrity sha512-C843/CD/4siF+bUp/8vt/0yj2GppORecdHyaBiFl8rn4YiNhTTBflVBRzQ3HkfRjTnqbTm1Io3kZD9Z10CkgIQ==
+eslint-config-wantedly-typescript@^0.1.7:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/eslint-config-wantedly-typescript/-/eslint-config-wantedly-typescript-0.1.7.tgz#a9aa34c82180f7be4649d8754535b85a5125ba83"
+  integrity sha512-DoC4vFAoV7FdXisZDp+1aaqevWbM8abilZuJKi63CBS3Hj0POSI+plMaAvgtvuJW/yHf6SguqaTEwGg4WWXiAQ==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^1.3.0"
     "@typescript-eslint/parser" "^1.3.0"
@@ -2618,17 +2618,17 @@ fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
-frolint@^0.1.6:
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/frolint/-/frolint-0.1.6.tgz#57023dcafa064d3bef7727cfd4fc4f1c581398ca"
-  integrity sha512-i/qTUsbdsU6ic6YGhMpb9lF2blsSrOSQcWtKicV2MF12qkESSMuVv9+DAL6dfSu7abTVO1Zr46iQcX2icYPMsw==
+frolint@^0.1.7:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/frolint/-/frolint-0.1.7.tgz#c1791aaaf1c5c76e826fbd4f0164fdb65fbb672f"
+  integrity sha512-MNjfrm4mZbqngPbKIhgDjA2exd7ZWgZiV2vgbUjneVuHvHBEO+2XHGB9WqmIIJILtV2grVABjq4h+ZMWagZyUA==
   dependencies:
     "@yamadayuki/ogh" "^0.1.0"
     arg "^4.1.0"
     chalk "^2.4.2"
     eslint "^5.14.1"
     eslint-config-wantedly "^0.1.6"
-    eslint-config-wantedly-typescript "^0.1.6"
+    eslint-config-wantedly-typescript "^0.1.7"
     execa "^1.0.0"
 
 from2@^2.1.0:
