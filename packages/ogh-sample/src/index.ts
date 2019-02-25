@@ -47,7 +47,7 @@ function preCommitHook(args: any, config: any) {
     });
 
     if (!prettierConfig) {
-      return null;
+      return;
     }
 
     const input = readFileSync(filepath, "utf8");

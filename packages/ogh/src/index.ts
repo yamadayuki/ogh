@@ -1,3 +1,5 @@
+/* eslint-disable indent */
+
 import * as cosmiconfig from "cosmiconfig";
 import { resolve } from "path";
 import { DEFAULT_SCRIPT_PATH, GIT_HOOKS, Hook, installHooks, isGitHook, uninstallHooks } from "./gitHooks";
@@ -58,9 +60,8 @@ export function entrypoint(packageName: string, opts: EntrypointOption = {}): Og
 export function extractHookFromArgs(args: typeof process.argv) {
   if (args.length >= 3 && isGitHook(args[2])) {
     return args[2];
-  } else {
-    return "";
   }
+  return "";
 }
 
 export function extractGitRootDirFromArgs(args: typeof process.argv) {

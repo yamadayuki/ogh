@@ -1,0 +1,6 @@
+{
+  "extends": "wantedly-typescript",
+  "rules": {
+    "no-console": "off"
+  }
+}
