@@ -27,6 +27,10 @@ commands:
           command: yarn build
 
       - run:
+          name: Run Lint
+          command: yarn lint:ci
+
+      - run:
           name: Run Test
           command: yarn test
 
