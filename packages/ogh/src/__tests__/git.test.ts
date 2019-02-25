@@ -1,5 +1,3 @@
-/* eslint-disable indent */
-
 import * as childProcess from "child_process";
 import * as mock from "mock-fs";
 import { getGitHooksDirectory } from "../git";

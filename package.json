@@ -17,7 +17,9 @@
     "prepublish": "npm run build",
     "publish": "lerna publish",
     "test": "lerna run --parallel test",
-    "clean": "yarn lerna clean --yes && rm -rf packages/*/lib"
+    "clean": "yarn lerna clean --yes && rm -rf packages/*/lib",
+    "lint": "frolint",
+    "lint:ci": "frolint --branch=master"
   },
   "@yamadayuki/ogh-sample": {
     "prettier": {
@@ -27,6 +29,6 @@
     }
   },
   "devDependencies": {
-    "frolint": "^0.1.7"
+    "frolint": "^0.1.8"
   }
 }
