@@ -1,5 +1,6 @@
 import { access, constants, readFile, readFileSync, writeFile } from "fs";
 import { resolve } from "path";
+import { sync as commandExistsSync } from "command-exists";
 import { getGitHooksDirectory } from "./git";
 
 // see https://git-scm.com/docs/githooks
@@ -156,7 +157,15 @@ function checkInstalled(packageName: string, hookName: Hook) {
   }
 }
 
+function checkGitCommand() {
+  return commandExistsSync("git");
+}
+
 export function installHooks(packageName: string, scriptPath: string = DEFAULT_SCRIPT_PATH, hooks: Hook[] = GIT_HOOKS) {
+  if (!checkGitCommand()) {
+    return;
+  }
+
   hooks.forEach(hookName => {
     if (checkInstalled(packageName, hookName)) {
       return;
@@ -180,6 +189,10 @@ export function installHooks(packageName: string, scriptPath: string = DEFAULT_S
 }
 
 export function uninstallHooks(packageName: string) {
+  if (!checkGitCommand()) {
+    return;
+  }
+
   GIT_HOOKS.forEach(hookName => {
     if (!checkInstalled(packageName, hookName)) {
       return;
