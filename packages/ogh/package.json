@@ -17,6 +17,7 @@
     "test": "jest -c ./jest.config.js"
   },
   "devDependencies": {
+    "@types/command-exists": "^1.2.0",
     "@types/cosmiconfig": "^5.0.3",
     "@types/jest": "^24.0.3",
     "@types/jest-diff": "^20.0.1",
@@ -28,6 +29,7 @@
     "typescript": "^3.3.3"
   },
   "dependencies": {
+    "command-exists": "^1.2.8",
     "cosmiconfig": "^5.0.7"
   },
   "files": [
