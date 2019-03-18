@@ -16,6 +16,11 @@ function getUnstagedFiles(args: any) {
   return stdout.split("\n").filter(line => line.length > 0);
 }
 
+function getDeletedFiles(args: any) {
+  const { stdout } = shellSync("git diff --diff-filter=D --name-only", { cwd: extractGitRootDirFromArgs(args) });
+  return stdout.split("\n").filter(line => line.length > 0);
+}
+
 function stageFile(args: any, file: string) {
   shellSync(`git add ${file}`, { cwd: extractGitRootDirFromArgs(args) });
 }
@@ -32,35 +37,38 @@ function isSupportedExtension(file: string) {
 function preCommitHook(args: any, config: any) {
   const files = getStagedFiles(args);
   const unstaged = getUnstagedFiles(args);
+  const deleted = getDeletedFiles(args);
   const rootDir = extractGitRootDirFromArgs(args);
 
   const isFullyStaged = (file: string) => !unstaged.includes(file);
 
-  files.forEach(file => {
-    if (!isSupportedExtension(file)) {
-      return;
-    }
-
-    const filepath = resolve(rootDir, file);
-    const prettierConfig = resolveConfig.sync(filepath, {
-      config: config.prettier.config ? config.prettier.config : SAMPLE_PRETTIER_CONFIG_FILE,
-    });
-
-    if (!prettierConfig) {
-      return null;
-    }
-
-    const input = readFileSync(filepath, "utf8");
-    const output = format(input, { ...prettierConfig, filepath });
-
-    if (output !== input) {
-      writeFileSync(filepath, output);
-
-      if (isFullyStaged(file)) {
-        stageFile(args, file);
+  files
+    .filter(file => !deleted.includes(file))
+    .forEach(file => {
+      if (!isSupportedExtension(file)) {
+        return;
       }
-    }
-  });
+
+      const filepath = resolve(rootDir, file);
+      const prettierConfig = resolveConfig.sync(filepath, {
+        config: config.prettier.config ? config.prettier.config : SAMPLE_PRETTIER_CONFIG_FILE,
+      });
+
+      if (!prettierConfig) {
+        return null;
+      }
+
+      const input = readFileSync(filepath, "utf8");
+      const output = format(input, { ...prettierConfig, filepath });
+
+      if (output !== input) {
+        writeFileSync(filepath, output);
+
+        if (isFullyStaged(file)) {
+          stageFile(args, file);
+        }
+      }
+    });
 }
 
 const oghSampleHook = (args: any, config: any) => {
