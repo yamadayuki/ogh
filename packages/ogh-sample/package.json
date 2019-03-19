@@ -1,6 +1,6 @@
 {
   "name": "@yamadayuki/ogh-sample",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "keywords": [],
@@ -30,7 +30,7 @@
     "typescript": "^3.3.3"
   },
   "dependencies": {
-    "@yamadayuki/ogh": "^0.3.0",
+    "@yamadayuki/ogh": "^0.3.1",
     "execa": "^1.0.0",
     "prettier": "^1.16.4"
   },
