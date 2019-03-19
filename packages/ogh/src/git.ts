@@ -8,3 +8,19 @@ export function getGitHooksDirectory(): string {
       .trimRight()
   );
 }
+
+/**
+ * git rev-parse --is-inside-work-tree returns true when the current directory is inside
+ */
+export function isInsideGitRepository(cwd?: string): boolean {
+  try {
+    return Boolean(
+      execSync("git rev-parse --is-inside-work-tree", { cwd })
+        .toString()
+        .trim()
+    );
+  } catch (err) {
+    console.warn(err);
+    return false;
+  }
+}
