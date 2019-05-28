@@ -1739,16 +1739,7 @@ caseless@~0.12.0:
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
   integrity sha1-G2gcIf+EAzyCZUMJBolCDRhxUdw=
 
-chalk@^2.0.0, chalk@^2.3.1:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.4.1.tgz#18c49ab16a037b6eb0152cc83e3471338215b66e"
-  integrity sha512-ObN6h1v2fTJSmUXoS3nMQ92LbDK9be4TV+6G+omQlGJFdcUX5heKi1LZ1YnRMIgwTLEj3E24bT6tYni50rlCfQ==
-  dependencies:
-    ansi-styles "^3.2.1"
-    escape-string-regexp "^1.0.5"
-    supports-color "^5.3.0"
-
-chalk@^2.0.1, chalk@^2.1.0, chalk@^2.4.2:
+chalk@^2.0.0, chalk@^2.0.1, chalk@^2.1.0, chalk@^2.3.1, chalk@^2.4.2:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.4.2.tgz#cd42541677a54333cf541a49108c1432b44c9424"
   integrity sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ==
@@ -2421,10 +2412,10 @@ eslint-config-prettier@^4.1.0:
   dependencies:
     get-stdin "^6.0.0"
 
-eslint-config-wantedly-typescript@^0.5.2:
-  version "0.5.2"
-  resolved "https://registry.npmjs.org/eslint-config-wantedly-typescript/-/eslint-config-wantedly-typescript-0.5.2.tgz#4b89351e80bb096f15c6276b8b1edca0bbccbeb3"
-  integrity sha512-kl+GTLeQNOJTIB9Gom1CQgz81dRi3UF5HB57998sQfRzVfmhihN13d3BqUhskmQVzQl4JA89ZyLDqmksncrsFA==
+eslint-config-wantedly-typescript@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/eslint-config-wantedly-typescript/-/eslint-config-wantedly-typescript-0.6.2.tgz#6235d9abfd7a8e9c46fb17615f9a1ec9c5e77d36"
+  integrity sha512-VXB139jHV0wAgiMCsVDMaaIniCQC+xGUxlIydm9W1r03F1qIli+vRC3vJskuvgIgo2SZ2fGBegBZZAE5IzU4aQ==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^1.4.2"
     "@typescript-eslint/parser" "^1.4.2"
@@ -2436,12 +2427,13 @@ eslint-config-wantedly-typescript@^0.5.2:
     eslint-plugin-prettier "^3.0.1"
     eslint-plugin-react "^7.12.4"
     eslint-plugin-react-hooks "^1.6.0"
+    eslint-plugin-use-macros "^0.6.2"
     typescript "^3.3.4000"
 
-eslint-config-wantedly@^0.5.2:
-  version "0.5.2"
-  resolved "https://registry.npmjs.org/eslint-config-wantedly/-/eslint-config-wantedly-0.5.2.tgz#165708718039fc7e45c2e562437afa9e8c4a099f"
-  integrity sha512-/mzrr9YbECIDunu6g9dOLjH7vIIxBkgS2+heUB/ZkOOUEv4TKjp9r1cHspMpQRKn+8jRTB3P2bLidhmBw1CRBQ==
+eslint-config-wantedly@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/eslint-config-wantedly/-/eslint-config-wantedly-0.6.2.tgz#6900c6c51099019665cf593b7ac20229ee68c5f6"
+  integrity sha512-Weogr5Vc2xGUIqff5OFWBT11R/LpcUezhhkPXhpQWHkYhdD6m3GwVzd4KcBl/LXi0Z+zMIP7xDV0KNXIxAIBeA==
   dependencies:
     babel-eslint "^10.0.1"
     eslint "^5.15.3"
@@ -2452,6 +2444,7 @@ eslint-config-wantedly@^0.5.2:
     eslint-plugin-prettier "^3.0.1"
     eslint-plugin-react "^7.12.4"
     eslint-plugin-react-hooks "^1.6.0"
+    eslint-plugin-use-macros "^0.6.2"
 
 eslint-import-resolver-node@^0.3.2:
   version "0.3.2"
@@ -2529,6 +2522,11 @@ eslint-plugin-react@^7.12.4:
     object.fromentries "^2.0.0"
     prop-types "^15.7.2"
     resolve "^1.10.1"
+
+eslint-plugin-use-macros@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-use-macros/-/eslint-plugin-use-macros-0.6.2.tgz#a92344dbb8c9c5558d725777dce6ab9a4cdc6dd3"
+  integrity sha512-NvmuW8kUhf2/HuQ8ukryv7zXymxI+PTYvWD51ZFxuYfFNRXTUcpSKK3AIFsb03M9TUXg6UVvj7ZpqZbjKhHRsQ==
 
 eslint-scope@3.7.1:
   version "3.7.1"
@@ -2898,20 +2896,20 @@ fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
-frolint@^0.5.2:
-  version "0.5.2"
-  resolved "https://registry.npmjs.org/frolint/-/frolint-0.5.2.tgz#fa6e55fa27153d3f4a1a723f60865dacbbd97135"
-  integrity sha512-HbUXV4mEd0Cy4ynU1l9qSt1ob7IGMAENd2GFUpW53paHxMpN7YppF6IDWMAqaGZq+am+iJ/RThu2uHj20D1haw==
+frolint@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/frolint/-/frolint-0.6.2.tgz#01ed4f41173dfe35b8d8f40fd6f14eac113c9065"
+  integrity sha512-55W8CyAFhNwbuttvprAF0gVZHOoyopr5NohfaVOWSyV4MqTdo1xYtAgazjKqFo6UPJjaaBkn34DXNddhO+if7g==
   dependencies:
     "@yamadayuki/ogh" "^0.3.1"
     arg "^4.1.0"
     chalk "^2.4.2"
     eslint "^5.15.3"
-    eslint-config-wantedly "^0.5.2"
-    eslint-config-wantedly-typescript "^0.5.2"
+    eslint-config-wantedly "^0.6.2"
+    eslint-config-wantedly-typescript "^0.6.2"
     execa "^1.0.0"
     prettier "^1.16.4"
-    prettier-config-wantedly "^0.5.1"
+    prettier-config-wantedly "^0.6.1"
     resolve "^1.10.0"
 
 from2@^2.1.0:
@@ -5429,10 +5427,10 @@ prelude-ls@~1.1.2:
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
   integrity sha1-IZMqVJ9eUv/ZqCf1cOBL5iqX2lQ=
 
-prettier-config-wantedly@^0.5.1:
-  version "0.5.1"
-  resolved "https://registry.npmjs.org/prettier-config-wantedly/-/prettier-config-wantedly-0.5.1.tgz#e133bd9702872d2f5b3a9098d4f277f1fc356cbb"
-  integrity sha512-2aiO6ZrU1yKn7+UKDeQse0mcBJBN7Dl6LvbU7TtzNdo0cwA4q5bBVPlTs7AD3mHGhh2hryJ4kKcecLDXMSri0Q==
+prettier-config-wantedly@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/prettier-config-wantedly/-/prettier-config-wantedly-0.6.1.tgz#4d69a232f6929759951665dc2e0330cec6707ebb"
+  integrity sha512-otN7t16aMiIzHn84Fe/3BqEMDHQ+7DUnYM51QD5P10Doli2Q1y729EME47HuhGqweeVbKC+PSNOi5QsqinFeRA==
 
 prettier-linter-helpers@^1.0.0:
   version "1.0.0"
@@ -5861,14 +5859,7 @@ resolve@1.1.7:
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.1.7.tgz#203114d82ad2c5ed9e8e0411b3932875e889e97b"
   integrity sha1-IDEU2CrSxe2ejgQRs5ModeiJ6Xs=
 
-resolve@1.x, resolve@^1.3.2:
-  version "1.10.0"
-  resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.10.0.tgz#3bdaaeaf45cc07f375656dfd2e54ed0810b101ba"
-  integrity sha512-3sUr9aq5OfSg2S9pNtPA9hL1FVEAjvfOC4leW0SNf/mpnaakz2a9femSd6LqAww2RaFctwyf1lCqnTHuF1rxDg==
-  dependencies:
-    path-parse "^1.0.6"
-
-resolve@^1.10.0, resolve@^1.10.1, resolve@^1.11.0, resolve@^1.5.0:
+resolve@1.x, resolve@^1.10.0, resolve@^1.10.1, resolve@^1.11.0, resolve@^1.3.2, resolve@^1.5.0:
   version "1.11.0"
   resolved "https://registry.npmjs.org/resolve/-/resolve-1.11.0.tgz#4014870ba296176b86343d50b60f3b50609ce232"
   integrity sha512-WL2pBDjqT6pGUNSUzMw00o4T7If+z4H2x3Gz893WoUQ5KW8Vr9txp00ykiP16VBaZF5+j/OcXJHZ9+PCvdiDKw==
