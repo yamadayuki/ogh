@@ -180,10 +180,9 @@ export function installHooks(packageName: string, scriptPath: string = DEFAULT_S
         if (err.code === "ENOENT") {
           createHook(packageName, hookName, scriptPath);
           return;
-        } else {
-          console.error(err);
-          return;
         }
+        console.error(err);
+        return;
       }
 
       appendHook(packageName, hookName, scriptPath);

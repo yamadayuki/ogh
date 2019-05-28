@@ -25,5 +25,8 @@
       "pattern": "**/packages/**/*.{js,jsx,ts,tsx}",
       "ignorePath": "./.prettierignore"
     }
+  },
+  "devDependencies": {
+    "frolint": "^0.5.2"
   }
 }
