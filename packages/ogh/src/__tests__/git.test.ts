@@ -1,4 +1,4 @@
-import * as childProcess from "child_process";
+import * as child_process from "child_process";
 import * as mock from "mock-fs";
 import { getGitHooksDirectory } from "../git";
 
@@ -18,7 +18,7 @@ const mockGit = () => {
     "/baz.js": "baz()",
   });
 
-  (childProcess as jest.Mocked<typeof childProcess>).execSync.mockImplementation((commandStr, _options) => {
+  (child_process as jest.Mocked<typeof child_process>).execSync.mockImplementation((commandStr, options) => {
     const [command, ...args] = commandStr.split(" ");
 
     if (command !== "git") {
@@ -31,8 +31,9 @@ const mockGit = () => {
           return Buffer.from("/.git");
         } else if (args[1] === "--git-path") {
           return Buffer.from(`/.git/${args[2]}`);
+        } else {
+          throw new Error(`unexpected subcommand first arg: ${args[1]}`);
         }
-        throw new Error(`unexpected subcommand first arg: ${args[1]}`);
       }
       case "diff": {
         return Buffer.from(args[1] === "--cached" ? "./foo.js\n" : "./bar.md\n./baz.js");
@@ -51,7 +52,7 @@ describe("git module", () => {
       mockGit();
       getGitHooksDirectory();
 
-      expect(childProcess.execSync).toHaveBeenCalledWith("git rev-parse --git-path hooks");
+      expect(child_process.execSync).toHaveBeenCalledWith("git rev-parse --git-path hooks");
     });
 
     it("returns the full path instead of relative path and concatenaited with argument", () => {
