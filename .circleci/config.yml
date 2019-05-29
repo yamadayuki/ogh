@@ -9,7 +9,7 @@ commands:
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
+            - yarn-v1-packages-{{ checksum "yarn.lock" }}
 
       - run:
           name: Install Dependencies
@@ -17,7 +17,7 @@ commands:
 
       - save_cache:
           name: Save Yarn Package Cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
+          key: yarn-v1-packages-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
             - node_modules
