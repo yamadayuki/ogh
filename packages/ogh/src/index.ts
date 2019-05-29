@@ -14,7 +14,7 @@ class Ogh {
   private hooks: Hook[];
   private performHook!: (args: typeof process.argv) => void;
 
-  public constructor({ packageName, scriptPath, hooks }: OghConstructorParams) {
+  constructor({ packageName, scriptPath, hooks }: OghConstructorParams) {
     this.packageName = packageName;
     this.scriptPath = scriptPath || DEFAULT_SCRIPT_PATH;
     this.hooks = hooks || GIT_HOOKS;
@@ -58,9 +58,8 @@ export function entrypoint(packageName: string, opts: EntrypointOption = {}): Og
 export function extractHookFromArgs(args: typeof process.argv) {
   if (args.length >= 3 && isGitHook(args[2])) {
     return args[2];
-  } else {
-    return "";
   }
+  return "";
 }
 
 export function extractGitRootDirFromArgs(args: typeof process.argv) {

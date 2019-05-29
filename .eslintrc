@@ -1,0 +1,6 @@
+{
+  "extends": ["wantedly-typescript/without-react"],
+  "rules": {
+    "no-console": "off"
+  }
+}
