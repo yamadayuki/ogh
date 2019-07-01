@@ -5,7 +5,7 @@
   "main": "index.js",
   "author": "Yuki Yamada <yamadayuuki0818@gmail.com>",
   "license": "MIT",
-  "dependencies": {
+  "devDependencies": {
     "@types/jest": "^24.0.3",
     "@types/mock-fs": "^3.6.30",
     "@types/node": "^12.0.0",
