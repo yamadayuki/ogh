@@ -93,3 +93,4 @@ typings/
 /packages/**/lib
 
 /**/tsconfig.tsbuildinfo
+.changelog/

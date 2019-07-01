@@ -11,6 +11,7 @@
     "@types/node": "^12.0.0",
     "jest": "^24.1.0",
     "lerna": "^3.8.0",
+    "lerna-changelog": "^0.8.2",
     "mock-fs": "^4.8.0",
     "ts-jest": "^24.0.0",
     "typescript": "^3.3.3"
@@ -24,7 +25,8 @@
     "prepublish": "npm run build",
     "publish": "lerna publish",
     "test": "lerna run --parallel test",
-    "clean": "yarn lerna clean --yes && rm -rf packages/*/lib"
+    "clean": "yarn lerna clean --yes && rm -rf packages/*/lib",
+    "changelog": "yarn lerna-changelog"
   },
   "@yamadayuki/ogh-sample": {
     "prettier": {
@@ -32,5 +34,15 @@
       "pattern": "**/packages/**/*.{js,jsx,ts,tsx}",
       "ignorePath": "./.prettierignore"
     }
+  },
+  "changelog": {
+    "repo": "yamadayuki/ogh",
+    "labels": {
+      "dependencies": "Update dependencies",
+      "enhancement": "New feature or improvement",
+      "bug": "Bug fix",
+      "documentation": "Improve documentation"
+    },
+    "cacheDir": ".changelog"
   }
 }
