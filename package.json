@@ -6,7 +6,14 @@
   "author": "Yuki Yamada <yamadayuuki0818@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "lerna": "^3.8.0"
+    "@types/jest": "^24.0.3",
+    "@types/mock-fs": "^3.6.30",
+    "@types/node": "^12.0.0",
+    "jest": "^24.1.0",
+    "lerna": "^3.8.0",
+    "mock-fs": "^4.8.0",
+    "ts-jest": "^24.0.0",
+    "typescript": "^3.3.3"
   },
   "workspaces": [
     "packages/*"
