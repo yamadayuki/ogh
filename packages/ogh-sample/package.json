@@ -19,7 +19,6 @@
     "test": "jest -c ./jest.config.js"
   },
   "devDependencies": {
-    "@types/execa": "^0.9.0",
     "@types/jest": "^24.0.3",
     "@types/mock-fs": "^3.6.30",
     "@types/node": "^12.0.0",
