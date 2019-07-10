@@ -1,4 +1,4 @@
-import * as cosmiconfig from "cosmiconfig";
+import cosmiconfig from "cosmiconfig";
 import { resolve } from "path";
 import { DEFAULT_SCRIPT_PATH, GIT_HOOKS, Hook, installHooks, isGitHook, uninstallHooks } from "./gitHooks";
 

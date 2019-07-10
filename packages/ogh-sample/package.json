@@ -15,8 +15,13 @@
   "scripts": {
     "postinstall": "test -e lib/index.js && node lib/index.js install || true",
     "preuninstall": "test -e lib/index.js && node lib/index.js uninstall || true",
-    "build": "tsc -b",
-    "test": "jest -c ./jest.config.js"
+    "build": "run-p tsc babel",
+    "tsc": "tsc --emitDeclarationOnly -p .",
+    "tsc:watch": "yarn run tsc --watch",
+    "babel": "babel src --out-dir lib --config-file ./.babelrc --extensions .ts",
+    "babel:watch": "yarn run babel --watch",
+    "test": "jest -c ./jest.config.js",
+    "test:watch": "yarn run test --watch"
   },
   "devDependencies": {
     "@types/prettier": "^1.16.0"
