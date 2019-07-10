@@ -13,8 +13,13 @@
   "homepage": "https://github.com/yamadayuki/ogh",
   "repository": "yamadayuki/ogh",
   "scripts": {
-    "build": "tsc -b",
-    "test": "jest -c ./jest.config.js"
+    "build": "run-p tsc babel",
+    "tsc": "tsc --emitDeclarationOnly -p .",
+    "tsc:watch": "yarn run tsc --watch",
+    "babel": "babel src --out-dir lib --config-file ./.babelrc --extensions .ts",
+    "babel:watch": "yarn run babel --watch",
+    "test": "jest -c ./jest.config.js",
+    "test:watch": "yarn run test --watch"
   },
   "devDependencies": {
     "@types/command-exists": "^1.2.0",
