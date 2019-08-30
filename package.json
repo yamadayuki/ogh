@@ -13,8 +13,10 @@
   "homepage": "https://github.com/yamadayuki/ogh",
   "repository": "yamadayuki/ogh",
   "dependencies": {
+    "clipanion": "^2.1.1",
     "command-exists": "^1.2.8",
-    "cosmiconfig": "^5.0.7"
+    "cosmiconfig": "^5.0.7",
+    "yup": "^0.27.0"
   },
   "devDependencies": {
     "@types/command-exists": "^1.2.0",
@@ -23,6 +25,7 @@
     "@types/jest-diff": "^20.0.1",
     "@types/mock-fs": "^3.6.30",
     "@types/node": "^12.7.2",
+    "@types/yup": "^0.26.23",
     "jest": "^24.1.0",
     "lerna-changelog": "^0.8.2",
     "mock-fs": "^4.8.0",
