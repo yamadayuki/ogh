@@ -10,7 +10,6 @@ export function createCli({
   label,
   version,
   hookCommand,
-  hookCommandParams,
 }: {
   packageName: string;
   label?: string;
