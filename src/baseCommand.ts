@@ -5,7 +5,7 @@ export interface OghParameters {
   packageName: string;
   scriptPath?: string;
   hooks?: Hook[];
-  config?: Record<string, any>;
+  config: Record<string, any>;
   cwd: string;
 }
 

@@ -1,6 +1,6 @@
 import { Cli, CommandClass, Command } from "clipanion";
 import cosmiconfig from "cosmiconfig";
-import { OghContext, OghParameters } from "./baseCommand";
+import { OghContext, OghParameters, OghBaseCommand } from "./baseCommand";
 import { InstallCommand } from "./installer";
 import { UninstallCommand } from "./uninstaller";
 import { GIT_HOOKS, Hook } from "./gitHooks";
@@ -10,11 +10,12 @@ export function createCli({
   label,
   version,
   hookCommand,
+  hookCommandParams,
 }: {
   packageName: string;
   label?: string;
   version?: string;
-  hookCommand: CommandClass<OghContext>;
+  hookCommand: (cwd: string, args: string[], config: Record<string, any>) => void;
 }) {
   const cli = new Cli<OghContext>({
     binaryLabel: label,
@@ -22,9 +23,19 @@ export function createCli({
     binaryVersion: version,
   });
 
+  class HookCommand extends OghBaseCommand {
+    @Command.Proxy()
+    args: string[] = [];
+
+    @Command.Path()
+    async execute() {
+      hookCommand(this.context.cwd, this.args, this.context.config);
+    }
+  }
+
   cli.register(InstallCommand);
   cli.register(UninstallCommand);
-  cli.register(hookCommand);
+  cli.register(HookCommand);
 
   return cli;
 }
