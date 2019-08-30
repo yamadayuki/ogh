@@ -1,4 +1,5 @@
 import { Cli, CommandClass, Command } from "clipanion";
+import cosmiconfig from "cosmiconfig";
 import { OghContext, OghParameters } from "./baseCommand";
 import { InstallCommand } from "./installer";
 import { UninstallCommand } from "./uninstaller";
@@ -29,6 +30,8 @@ export function createCli({
 }
 
 export function perform(cli: Cli<OghContext>, options: OghParameters) {
+  const result = cosmiconfig(options.packageName).searchSync();
+
   cli.runExit(process.argv.slice(2), {
     hooks: options.hooks,
     packageName: options.packageName,
@@ -36,6 +39,7 @@ export function perform(cli: Cli<OghContext>, options: OghParameters) {
     stderr: process.stderr,
     stdin: process.stdin,
     stdout: process.stdout,
+    config: result ? result.config : {},
   });
 }
 
