@@ -40,6 +40,7 @@ export function perform(cli: Cli<OghContext>, options: OghParameters) {
     stdin: process.stdin,
     stdout: process.stdout,
     config: result ? result.config : {},
+    cwd: process.cwd(),
   });
 }
 

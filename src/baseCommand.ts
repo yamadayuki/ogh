@@ -6,6 +6,7 @@ export interface OghParameters {
   scriptPath?: string;
   hooks?: Hook[];
   config?: Record<string, any>;
+  cwd: string;
 }
 
 export type OghContext = OghParameters & BaseContext;
