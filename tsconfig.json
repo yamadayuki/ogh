@@ -1,15 +1,14 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "emitDeclarationOnly": true,
-    "importHelpers": true,
     "module": "commonjs",
     "strict": true,
-    "target": "es2017",
-    "composite": true,
-    "incremental": true,
+    "target": "es2015",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "moduleResolution": "node"
-  }
+    "moduleResolution": "node",
+    "outDir": "lib",
+    "rootDir": "src"
+  },
+  "exclude": ["lib", "**/*.test.*"]
 }
