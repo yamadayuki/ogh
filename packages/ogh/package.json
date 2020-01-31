@@ -24,7 +24,7 @@
   "devDependencies": {
     "@types/command-exists": "^1.2.0",
     "@types/cosmiconfig": "^5.0.3",
-    "@types/jest-diff": "^20.0.1"
+    "@types/jest-diff": "^24.3.0"
   },
   "dependencies": {
     "command-exists": "^1.2.8",
