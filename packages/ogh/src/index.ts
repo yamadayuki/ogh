@@ -1,4 +1,4 @@
-import cosmiconfig from "cosmiconfig";
+import { cosmiconfigSync } from "cosmiconfig";
 import { resolve } from "path";
 import { DEFAULT_SCRIPT_PATH, GIT_HOOKS, Hook, installHooks, isGitHook, uninstallHooks } from "./gitHooks";
 
@@ -21,8 +21,9 @@ class Ogh {
     this.performHook = _ => {};
   }
 
-  public registerPerformHook(fn: (args: typeof process.argv, config: cosmiconfig.Config) => void) {
-    const result = cosmiconfig(this.packageName).searchSync();
+  public registerPerformHook(fn: (args: typeof process.argv, config: any) => void) {
+    const explorer = cosmiconfigSync(this.packageName);
+    const result = explorer.search();
 
     this.performHook = args => fn(args, result ? result.config : {});
     return this;
