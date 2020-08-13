@@ -12,7 +12,7 @@
     "@types/mock-fs": "^4.10.0",
     "@types/node": "^14.0.20",
     "babel-preset-wantedly": "^0.0.2",
-    "jest": "^26.1.0",
+    "jest": "^26.4.0",
     "lerna": "^3.22.1",
     "lerna-changelog": "^1.0.1",
     "mock-fs": "^4.12.0",
