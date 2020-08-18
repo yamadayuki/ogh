@@ -8,7 +8,7 @@
   "devDependencies": {
     "@babel/cli": "^7.10.4",
     "@babel/core": "^7.11.1",
-    "@types/jest": "^26.0.4",
+    "@types/jest": "^26.0.10",
     "@types/mock-fs": "^4.10.0",
     "@types/node": "^14.6.0",
     "babel-preset-wantedly": "^0.0.2",
