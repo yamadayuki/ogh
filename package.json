@@ -6,7 +6,7 @@
   "author": "Yuki Yamada <yamadayuuki0818@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@babel/cli": "^7.10.4",
+    "@babel/cli": "^7.11.6",
     "@babel/core": "^7.11.1",
     "@types/jest": "^26.0.10",
     "@types/mock-fs": "^4.10.0",
