@@ -7,7 +7,7 @@
   "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.12.10",
-    "@babel/core": "^7.12.8",
+    "@babel/core": "^7.12.10",
     "@types/jest": "^26.0.19",
     "@types/mock-fs": "^4.13.0",
     "@types/node": "^14.14.17",
